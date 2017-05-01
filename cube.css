@@ -1,0 +1,79 @@
+body {
+	background-color: #b3ecff;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+	font-size: 40px;
+}
+
+table, td { 
+	border: 1px solid gray;
+	background-color: white;
+	margin: 0px auto;
+	
+}
+
+th {
+	font-weight: bold;
+	font-size: 30px;
+	border: 1px solid gray;
+	background-color: white;
+}
+
+#email {
+	text-align:left;
+	font-size: 20px;
+	width: 30%;
+}
+
+#orderNo {
+	text-align:center;
+	font-size: 20px;
+	width: 30%;
+}
+
+#value {
+	text-align:right;
+	font-size: 20px;
+	width: 30%;
+}
+
+#search {
+	text-align:center;
+	font-size: 20px;
+}
+
+#textBox {
+	font-size: 20px;
+	text-align: center;		
+}
+
+#searchBtn {
+	font-size: 20px;
+	text-align: center;	
+}
+
+input[type="button"] {
+	margin: 0 5px;
+	font-size: 20px;
+	border-radius: 2px;
+}
+
+input[type="submit"] {
+	margin: 0 5px;
+	font-size: 20px;
+	border-radius: 2px;
+}
+
+input[type="button"]:focus {
+    background: #ff0004;
+}
+
+.Results {
+	text-align: center;
+    font-size: 20px;
+	width: 90%;
+	
+}
