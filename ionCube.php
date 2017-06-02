@@ -17,14 +17,14 @@
 <h1>Order Reports</h1>
 <br>
 
-<!-- Create a table with the below headings. This will be used to display the data for each page of results that are created dynamically -->
+<!-- Create a table. This will be used to display the data -->
 <table class="Reports">
 </table>
 <br>
 
 <!-- Create a text input field and a submit button that will be used to search the results for a specific Domain name -->
 <div id="search">
-<form method="post">
+<form action="search.php" method="get">
 <input type="text" id="textBox" name="search_value" placeholder="Domain Name...">
 <input type="submit" id="searchBtn" value="Search">
 </form>
@@ -35,10 +35,8 @@
 <script>
 $(document).ready(function() {
 loadData();
-searchDomain();
-sendPhp();
-})
-
+/* searchDomain(); */
+});
 </script>
 
 

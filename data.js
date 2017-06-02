@@ -1,7 +1,12 @@
-/* When called the loadData() function will perform a get request to the url to retrieve the data  
-The data for the page which then be displayed under the HTML table #Results. If there is an 
-error an alert will be displayed */
+/* When called the loadData() function will perform a get request to the url(orderdata) to retrieve the data.
+It will then be processed removing unwanted text from the start and end of the file, removing blank lines.
+The data is then converted into an array of strings before the strings are then split into there seperate 
+values and placed into objects which are then placed into an array. This array is then converted into valid
+JSON which can then be used by PHP to search through. */
 
+/* var JSONText; */
+var reports = [];
+var reps = {};
 function loadData() {
 $.ajax({
         url: "orderdata",
@@ -12,15 +17,19 @@ $.ajax({
 			l = lines.length -3;
 			lines.splice(l,3);
 			lines = lines.filter(Boolean);
-			var reports = [];
-			var reps = {};
+						
 			for(i in lines) {
 			reps = arraySort(lines, i);
 			reports.push(reps);
 			}
 			console.log(reports);
-			var JSONText = JSON.stringify(reports);
-			console.log(JSONText);
+			/*reports.splice(5, 101); /* change array to length 10 */
+			console.log(reports);
+			sendPhp(reports);
+			/* searchDomain(reports); */
+			/* JSONText = JSON.stringify(reports); */
+			/* console.log(JSONText); */
+			
 		}, 
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('Error: ' + textStatus + ' - ' + errorThrown);
@@ -34,7 +43,7 @@ stored to var search. An ajax get request is then carried out using the url and 
 names for any matches removes any displayed data in the table and the textbox and then displays the results in the table.
 If no results are found an alert window is shown. */
 
-function searchDomain(reports) {
+/* function searchDomain(reports) {
 var search;
 $("form").submit(function(e) {
     e.preventDefault();
@@ -42,20 +51,16 @@ $("form").submit(function(e) {
 	search = $('input[name="search_value"]').val();
 	console.log(search);
 	$(".Results td").parent().remove();
-	$('input[name="search_value"]').val('');
-			
-			console.log(lines);
-			for(i in lines) {
-			var row = $('<tr><th colspan="3">' + strDomain(lines, i) + '<br>' + '</th></tr>' 
-			+ '<tr><td id="email">' + strEmail(lines, i) + '<br>' 
-			+ '</td><td id="orderNo">' + orderNo(lines, i) + '<br>'
-			+ '</td><td id="value">' + orderValue(lines, i) + '<br>'
-			+ '</td></tr>'); 
-		
-			$('.Reports').append(row);
-        }
-	})
-}
+	var data;
+		$.ajax({
+        url: 'search.php',
+		type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(reports),
+		dataType: 'json',
+		});    
+    });
+} */
 
 
 function arraySort(lines, i) {
@@ -129,4 +134,20 @@ function orderValue(lines, i) {
 		var splt = str.split(':');
 		return '£' + splt[3];
 	}
+}
+
+/* JSON.stringify(reports) */
+
+function sendPhp(reports) {
+	var data = reports;
+	$.ajax({
+		type: 'POST',
+		url: 'search.php',		
+        data: {'data': JSON.stringify(data)},
+		/* contentType: 'application/json',
+		dataType: 'json', */
+		success: function(data){
+			alert(data);
+		}		
+	});
 }
