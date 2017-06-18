@@ -96,6 +96,3 @@ data for all domains should be returned and displayed.
 
 Use any relevant libraries to help such as JQuery and lodash, or a
 framework such as AngularJS or React.
-
-
-ionCube 2017
